@@ -1,6 +1,6 @@
-CREATE DATABASE ig_clone;
+CREATE DATABASE Photo Sphere;
 
-USE ig_clone;
+USE Photo Sphere;
 
 /*Users*/
 CREATE TABLE users(
@@ -92,12 +92,12 @@ GROUP BY user_id
 ORDER BY activity_count DESC;
 
 
--- 1.to find the 5 oldest users of the instagram from the given data
+-- 1.to find the 5 oldest users of the Photo sphere from the given data
 select * from users
 select username,created_at 
 from users order by created_at desc limit 5;
 
--- 2.to find the users who never posted a single post on instagram
+-- 2.to find the users who never posted a single post on Photo sphere
 select * from photos,users
 select u.id,u.username from users u
 left join photos p on p.user_id=u.id
@@ -118,7 +118,7 @@ group by p.tag_id order by count(p.tag_id) desc limit 5
 select DATE_FORMAT((created_at),"%w") as d,count(username) from users
 group by d order by count(username) desc
 
--- 6.provide on how many times does average user posts on instagram .also provide the total number of photos on instagaram/total number of users
+-- 6.provide on how many times does average user posts on Photo sphere .also provide the total number of photos on Photo sphere/total number of users
 with base as(
 select u.id as userid,count(p.id) as photoid from users u left join photos p on p.user_id=u.id group by u.id)
 select sum(photoid) as totalphotos,count(userid) as total_users,sum(photoid)/count(userid) as photoperuser from base;
